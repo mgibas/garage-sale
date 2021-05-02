@@ -32,12 +32,12 @@
         </main>
 
         <!-- Details sidebar -->
-        <item-details-slide-over class="lg:hidden" :open="detailsOpen" @close="detailsOpen = false">
+        <slide-over class="lg:hidden" :open="detailsOpen" @close="detailsOpen = false">
           <item-details :item="currentItem" /> 
-        </item-details-slide-over>
+        </slide-over>
         <TransitionRoot
           as="aside"
-          class="w-96 bg-white p-8 border-l border-gray-200 overflow-y-auto"
+          class="hidden w-96 bg-white p-8 border-l border-gray-200 overflow-y-auto lg:block"
           :show="!!currentItem"
           enter="transform transition ease-in-out duration-500 sm:duration-700"
           enter-from="translate-x-full"
@@ -57,7 +57,7 @@
 import { defineProps, ref } from 'vue'
 import { TransitionRoot } from '@headlessui/vue'
 import ItemDetails from '../components/item-details.vue'
-import ItemDetailsSlideOver from '../components/item-details-slide-over.vue'
+import SlideOver from '../components/slide-over.vue'
 import useCurrencyFormat from '../composables/use-currency-format.js'
 
 const items = [{
