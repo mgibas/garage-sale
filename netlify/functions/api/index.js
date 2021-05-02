@@ -8,7 +8,7 @@ exports.handler = async (event, context) => {
   console.log(event)
   console.log(path)
 
-  return api[method]
-    ? api[method]({ path, event, context })
+  return methods[method]
+    ? methods[method]({ path, event, context })
     : { statusCode: 400, body: 'Unrecognized HTTP Method' }
 }
