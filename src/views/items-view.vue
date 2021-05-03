@@ -10,6 +10,10 @@
           <div class="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex">
               <h1 class="flex-1 text-2xl font-bold text-gray-900">Wyprzedaż</h1>
+              <button type="button" class="inline-flex items-center p-2 rounded-full text-gray-400 transition-colors
+                                          hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                <LoginIcon class="h-5 w-5" aria-hidden="true" @click="identity.signIn"/>
+              </button>
             </div>
 
             <!-- Gallery -->
@@ -56,9 +60,11 @@
 <script setup>
 import { defineProps, ref } from 'vue'
 import { TransitionRoot } from '@headlessui/vue'
+import { LoginIcon, LogoutIcon } from '@heroicons/vue/outline'
 import { useFetch } from '@vueuse/core'
 import ItemDetails from '../components/item-details.vue'
 import SlideOver from '../components/slide-over.vue'
+import useIdentity from '../composables/use-identity.js'
 import useCurrencyFormat from '../composables/use-currency-format.js'
 
 const { data: items } = useFetch(`${window.location.origin}/api/items`).get().json()
@@ -69,4 +75,5 @@ const itemClick = (item) => {
   detailsOpen.value = !matchMedia('(min-width: 1024px)').matches && true
 }
 const { currency } = useCurrencyFormat()
+const { identity } = useIdentity() 
 </script>
