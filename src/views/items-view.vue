@@ -56,31 +56,12 @@
 <script setup>
 import { defineProps, ref } from 'vue'
 import { TransitionRoot } from '@headlessui/vue'
+import { useFetch } from '@vueuse/core'
 import ItemDetails from '../components/item-details.vue'
 import SlideOver from '../components/slide-over.vue'
 import useCurrencyFormat from '../composables/use-currency-format.js'
 
-const items = [{
-  name: 'Test',
-  price: 549999,
-  image: 'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
-  description: 'Dictum ante, et mollis eros augue at est. Class aptent.'
-}, {
-  name: 'Kubek',
-  price: 70000,
-  description: 'Aliquam elit, a commodo nisi felis nec nibh. Nulla facilisi. Etiam at tortor. Vivamus quis sapien nec.',
-  image: 'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
-}, {
-  name: 'Coś',
-  price: 123123,
-  description: 'Aliquam elit, a commodo nisi felis nec nibh. Nulla facilisi. Etiam at tortor. Vivamus quis sapien nec.',
-  image: 'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
-}, {
-  name: 'Gra planszowa',
-  price: 65454,
-  description: 'Dictum ante, et mollis eros augue at est. Class aptent.',
-  image: 'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
-}]
+const { data: items } = useFetch(`${window.location.origin}/api/items`).get().json()
 const currentItem = ref()
 const detailsOpen = ref(false)
 const itemClick = (item) => {
